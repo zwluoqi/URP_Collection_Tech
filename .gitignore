@@ -4,7 +4,8 @@ cmake-build-debug
 .idea
 .vscode
 Library
-
+Logs
+Temp
 
 *.pdf
 *.zip
