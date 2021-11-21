@@ -1,7 +1,8 @@
 .svn
+.idea
 build
 cmake-build-debug
-.idea
+
 .vscode
 Library
 Logs

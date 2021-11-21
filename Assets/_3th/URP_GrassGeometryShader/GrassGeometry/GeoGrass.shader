@@ -186,4 +186,67 @@ Shader "Unlit/GeoGrass" {
 		}
 
 	}
+
+    SubShader
+    {
+		Tags { "RenderType"="Opaque" "RenderPipeline" = "UniversalPipeline" }
+		LOD 300
+
+		Cull Off
+
+        Pass
+        {
+            Name "Unlit"
+			HLSLPROGRAM
+
+            #pragma vertex vert
+            #pragma fragment frag
+
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
+
+			struct Attributes
+            {
+                float4 positionOS       : POSITION;
+                float2 uv               : TEXCOORD0;
+            };
+
+            struct Varyings
+            {
+                float2 uv        : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+            };
+
+			// Variables
+			CBUFFER_START(UnityPerMaterial) // Required to be compatible with SRP Batcher
+			float4 _Color;
+			float4 _Color2;
+			float _Width;
+			float _RandomWidth;
+			float _Height;
+			float _RandomHeight;
+			float _WindStrength;
+			float _TessellationUniform; // Used in CustomTesellation.hlsl
+			CBUFFER_END
+
+			Varyings vert(Attributes input)
+            {
+                Varyings output = (Varyings)0;
+
+				VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
+				output.vertex = vertexInput.positionCS;
+                // output.uv = TRANSFORM_TEX(input.uv, _BaseMap);
+				return  output;
+			}
+
+			half4 frag(Varyings input) : SV_Target
+            {
+                return _Color;
+            }
+			
+			ENDHLSL
+		}
+	}
+	
 }

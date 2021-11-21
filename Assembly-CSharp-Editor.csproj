@@ -13,11 +13,11 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{47f3ba1a-b9e0-d4eb-3611-333548afde7b}</ProjectGuid>
+    <ProjectGuid>{9468ce23-2755-5a2f-0413-301d805a1d61}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -52,20 +52,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\_3th\General\SceneRenderPipelineConfig.cs" />
-     <Compile Include="Assets\_3th\General\CameraController\SimpleCameraController.cs" />
-     <Compile Include="Assets\_3th\URP_ComputeShaderGrass\GrassMeshGen.cs" />
-     <None Include="Assets\_3th\URP_ComputeShaderGrass\GrassUnlitShader.shader" />
-     <None Include="Assets\_3th\URP_GrassGeometryShader\GrassGeometry\GeoGrass.shader" />
-     <None Include="Assets\_3th\URP_GrassGeometryShader\GrassGeometry\Tessellation.hlsl" />
-     <None Include="Assets\_3th\URP_ComputeShaderGrass\WindCompute.compute" />
-     <None Include="Assets\_3th\URP_ToonLitShader\Shader\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />
-     <None Include="Assets\_3th\URP_ToonLitShader\Shader\NiloInvLerpRemap.hlsl" />
-     <None Include="Assets\_3th\URP_ToonLitShader\Shader\NiloOutlineUtil.hlsl" />
-     <None Include="Assets\_3th\URP_GrassGeometryShader\GrassGeometry\Grass.hlsl" />
-     <None Include="Assets\_3th\URP_ToonLitShader\Shader\NiloZOffset.hlsl" />
-     <None Include="Assets\_3th\URP_ToonLitShader\Shader\SimpleURPToonLitOutlineExample.shader" />
-     <None Include="Assets\_3th\URP_ToonLitShader\Shader\SimpleURPToonLitOutlineExample_Shared.hlsl" />
+     <Compile Include="Assets\_3th\URP_ComputeShaderGrass\Editor\GrassMeshGen.cs" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -288,8 +275,32 @@
  <Reference Include="UnityEditor.UnityConnectModule">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.OSXStandalone.Extensions">
+ <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Plastic.Newtonsoft.Json">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.collab-proxy@1.13.5/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Plastic.Antlr3.Runtime">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.collab-proxy@1.13.5/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="unityplastic">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.collab-proxy@1.13.5/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+ </Reference>
+ <Reference Include="log4netPlastic">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.collab-proxy@1.13.5/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.NRefactory">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.render-pipelines.core@10.7.0/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
+ </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -639,6 +650,12 @@
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/netstandard.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.TestRunner">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.ShaderGraph.Editor">
  <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
  </Reference>
@@ -707,6 +724,10 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{47f3ba1a-b9e0-d4eb-3611-333548afde7b}</Project>
+      <Name>Assembly-CSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
