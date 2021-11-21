@@ -64,7 +64,9 @@
      <None Include="Assets\_3th\URP_ToonLitShader\Shader\NiloOutlineUtil.hlsl" />
      <None Include="Assets\_3th\URP_GrassGeometryShader\GrassGeometry\Grass.hlsl" />
      <None Include="Assets\_3th\URP_ToonLitShader\Shader\NiloZOffset.hlsl" />
+     <None Include="Assets\_3th\URP_Cloud\Shaders\Shader Graph\Clouds\Clouds Generated.shader" />
      <None Include="Assets\_3th\URP_ToonLitShader\Shader\SimpleURPToonLitOutlineExample.shader" />
+     <None Include="Assets\_3th\URP_Cloud\readme.txt" />
      <None Include="Assets\_3th\URP_ToonLitShader\Shader\SimpleURPToonLitOutlineExample_Shared.hlsl" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

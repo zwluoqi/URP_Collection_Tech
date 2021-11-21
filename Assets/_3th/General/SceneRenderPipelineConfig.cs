@@ -12,13 +12,37 @@ public class SceneRenderPipelineConfig : MonoBehaviour
     public Material skyBoxAsset;
     void OnEnable()
     {
-        GraphicsSettings.renderPipelineAsset = renderPipelineAsset;
-        Lightmapping.lightingSettings = lightingSettingsAsset;
-        RenderSettings.skybox = skyBoxAsset;
+        if (renderPipelineAsset)
+        {
+            GraphicsSettings.renderPipelineAsset = renderPipelineAsset;
+        }
+
+        if (lightingSettingsAsset)
+        {
+            Lightmapping.lightingSettings = lightingSettingsAsset;
+        }
+
+        if (skyBoxAsset)
+        {
+            RenderSettings.skybox = skyBoxAsset;
+        }
     }
 
     void OnValidate()
     {
-        GraphicsSettings.renderPipelineAsset = renderPipelineAsset;
+        if (renderPipelineAsset)
+        {
+            GraphicsSettings.renderPipelineAsset = renderPipelineAsset;
+        }
+
+        if (lightingSettingsAsset)
+        {
+            Lightmapping.lightingSettings = lightingSettingsAsset;
+        }
+
+        if (skyBoxAsset)
+        {
+            RenderSettings.skybox = skyBoxAsset;
+        }
     }
 }
