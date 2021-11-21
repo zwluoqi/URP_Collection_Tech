@@ -1,5 +1,6 @@
 # URP_Collection_Tech
- 一些URP实践用例
+ 一些URP实践用例、Tree、Grass、Cloud、Water And Soon。
+
 Unity version : 2020.3 on master branch \
 Tested with : Win DX11, Mac Metal
 | Scene | Image | Description |
