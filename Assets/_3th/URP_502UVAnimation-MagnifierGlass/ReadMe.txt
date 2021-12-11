@@ -1,0 +1,3 @@
+﻿放大镜
+1.片段着色过程中缩放计算后的屏幕空间坐标,
+2.通过变化后的UV采样屏幕当前FrameBuffer,注意URP需要勾选OpaqueTexture，才能采样得到FrameBuffer数据
