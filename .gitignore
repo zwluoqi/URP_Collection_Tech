@@ -46,3 +46,4 @@ obj
 *.out
 *.app
 obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+*.cache

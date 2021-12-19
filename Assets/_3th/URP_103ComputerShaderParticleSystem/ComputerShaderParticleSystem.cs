@@ -1,20 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
-using Unity.Jobs;
-using UnityEditor;
 using UnityEngine;
-using Random = Unity.Mathematics.Random;
 
-public class JoySystemParticleSystem : MonoBehaviour
+public class ComputerShaderParticleSystem : MonoBehaviour
 {
 
-    
+    #region Compute Shader
     public struct Particle
     {
         public Vector3 pos;
-        public bool active;
+        public float active;
         public Vector3 dir;
         public float speed;
         public Color color;
@@ -23,7 +19,8 @@ public class JoySystemParticleSystem : MonoBehaviour
     }
     public struct Emit
     {
-        public NativeArray<Particle> particleBuffers;
+        public ComputeBuffer buffer;
+        public Particle[] particleBuffers;
         private int curParticleEmitIndex;
         private float particleEmitTimer;
         private float lastParticleEmitTimer;
@@ -37,7 +34,13 @@ public class JoySystemParticleSystem : MonoBehaviour
             this.emitSpaceTimer = _particleSpaceTime;
             var particleCount = Mathf.CeilToInt( _life / _particleSpaceTime);
             particleCount = Mathf.Max(1, particleCount);
-            particleBuffers = new NativeArray<Particle>(particleCount, Allocator.Persistent);
+            particleBuffers = new Particle[particleCount];
+            int stride = 0;
+            unsafe
+            {
+                stride = sizeof(Particle);    
+            }
+            buffer = new ComputeBuffer(particleCount,stride);
         }
 
         public void EmitParticle(float delta)
@@ -47,7 +50,7 @@ public class JoySystemParticleSystem : MonoBehaviour
             {
                 var particleBuffer = particleBuffers[curParticleEmitIndex];
                 
-                particleBuffer.active = true;
+                particleBuffer.active = 1.0f;
                 Vector3 pos = new Vector3( UnityEngine.Random.Range(-10.0f,10.0f),0,UnityEngine.Random.Range(-10.0f,10.0f));
                 Color color = new Color( UnityEngine.Random.Range(0,1.0f),
                     UnityEngine.Random.Range(0,1.0f),
@@ -74,47 +77,41 @@ public class JoySystemParticleSystem : MonoBehaviour
 
         public void Dispose()
         {
-            particleBuffers.Dispose();
+            // particleBuffers.Dispose();
+            buffer.Dispose();
         }
     }
 
-    Emit emit;
+    public ComputeShader shader;
     public float particleScale = 1;
     public float particleSpeed = 1;
     public float particleLift = 1;
     public float particleRadio = 0.1f;
     
-    public int timer = 0;
     public Material material;
-    
-    private JobHandle jobHandle;
-    private ParticlePosJob particlePosJob;
-    private ParticleSystemJob particleSystemJob;
-    private int coreCount = 2;
 
-    Mesh mesh;
-    public NativeArray<Vector3> m_Positions;
+    private ComputeBuffer posBuffer;
+    private Emit emit;
+    private Vector3[] m_Positions;
+    private Color[] m_Colors;
+    private Vector2[] m_Uv0S;
+    private int[] m_Indices;
+    private Mesh mesh;
+    #endregion
 
-    public NativeArray<Color> m_Colors;
-    public NativeArray<Vector2> m_Uv0S;
-    public NativeArray<int> m_Indices;
     private void Start()
     {
-        coreCount = Mathf.Max(2,System.Environment.ProcessorCount-2);
         emit.init(particleLift,particleSpeed,particleRadio);
         
-        particleSystemJob.particles = emit.particleBuffers;
-        particlePosJob.particles = emit.particleBuffers;
         
-        m_Positions = new NativeArray<Vector3>(emit.particleBuffers.Length*4, Allocator.Persistent);
-
-        m_Colors = new NativeArray<Color>(emit.particleBuffers.Length*4, Allocator.Persistent);
-        m_Uv0S = new NativeArray<Vector2>(emit.particleBuffers.Length*4, Allocator.Persistent);
-        m_Indices = new NativeArray<int>(emit.particleBuffers.Length*6, Allocator.Persistent);
+        m_Positions = new Vector3[emit.particleBuffers.Length*4];
+        posBuffer = new ComputeBuffer(emit.particleBuffers.Length*4,sizeof(float)*3);
+        m_Colors = new Color[emit.particleBuffers.Length*4];
+        m_Uv0S = new Vector2[emit.particleBuffers.Length*4];
+        m_Indices = new int[emit.particleBuffers.Length*6];
 
         InitMesh();
     }
-
     void InitMesh()
     {
         mesh = new Mesh();
@@ -157,32 +154,30 @@ public class JoySystemParticleSystem : MonoBehaviour
         mesh.RecalculateBounds();
     }
 
+
     private void Update()
     {
         emit.EmitParticle(Time.deltaTime);
+
+        emit.buffer.SetData(emit.particleBuffers);
+        int kernel = shader.FindKernel("CSMainParticle");
+        shader.SetBuffer(kernel, "dataBuffer", emit.buffer);
+        shader.Dispatch(kernel, emit.particleBuffers.Length, 1, 1);
         
-        particleSystemJob.delta = Time.deltaTime;
-        particleSystemJob.m_Positions = m_Positions;
-        particleSystemJob.m_Colors = m_Colors;
+        emit.buffer.GetData(emit.particleBuffers);
 
-        particlePosJob.delta = Time.deltaTime;
-
-        var handle =  particlePosJob.Schedule<ParticlePosJob>(emit.particleBuffers.Length,
-            (emit.particleBuffers.Length) / (coreCount) + 1);
-        jobHandle = particleSystemJob.Schedule<ParticleSystemJob>(m_Positions.Length,
-            (m_Positions.Length ) / (coreCount)  +1,handle);
+        posBuffer.SetData(m_Positions);
+        kernel = shader.FindKernel("CSMainPos");
+        shader.SetBuffer(kernel, "dataBuffer", emit.buffer);
+        shader.SetBuffer(kernel, "m_Positions", posBuffer);
+        shader.Dispatch(kernel, m_Positions.Length, 1, 1);
         
-    }
-
-    private void OnDrawGizmos()
-    {
-        Graphics.DrawMesh(mesh,this.transform.localToWorldMatrix,material,0);
+        posBuffer.GetData(m_Positions);
+        
     }
 
     private void LateUpdate()
     {
-        jobHandle.Complete();
-        
         mesh.SetVertices(m_Positions);
         mesh.SetColors(m_Colors);
         mesh.RecalculateBounds();
@@ -192,11 +187,7 @@ public class JoySystemParticleSystem : MonoBehaviour
 
     private void OnDestroy()
     {
-        m_Positions.Dispose();
-        m_Colors.Dispose();
-        m_Indices.Dispose();
-        m_Uv0S.Dispose();
         emit.Dispose();
+        this.posBuffer.Dispose();
     }
 }
-

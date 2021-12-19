@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf55ebb76138a1488e9f378bf599f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderPipelineAsset: {fileID: 11400000, guid: 371c221761b2a1944ad26d3a03578aee, type: 2}
+  renderPipelineAsset: {fileID: 11400000, guid: c20ab8e23fb03df429bb21272bf4b927, type: 2}
   lightingSettingsAsset: {fileID: 4890085278179872738, guid: 40710393ad5804f9098552cb34569d98, type: 2}
   skyBoxAsset: {fileID: 2100000, guid: 2b187726da8016e49b95f878b8845f03, type: 2}
 --- !u!20 &963194227

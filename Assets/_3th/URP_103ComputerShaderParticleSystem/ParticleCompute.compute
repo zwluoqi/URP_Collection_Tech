@@ -1,0 +1,75 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMainParticle
+#pragma kernel CSMainPos
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+struct Particle
+{
+    float3 pos;
+    float active;
+    float3 dir;
+    float speed;
+    float4 color;
+    float timer;
+    float life;
+};
+
+RWStructuredBuffer<Particle> dataBuffer;
+
+RWStructuredBuffer<float3> m_Positions;
+
+[numthreads(8,1,1)]
+void CSMainParticle (uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+    Particle p = dataBuffer[id.x];
+    p.timer += 0.033;
+    if (p.timer > p.life)
+    {
+        p.active = 0.0f;
+    }
+    else
+    {
+        p.pos += p.dir * p.speed *  0.033;
+    }
+    dataBuffer[id.x] = p;
+}
+
+[numthreads(32,1,1)]
+void CSMainPos (uint3 id : SV_DispatchThreadID)
+{
+    float size = 0.5f;
+    float pIndex = id.x / 4;
+    int vIndex = id.x % 4;
+    Particle p = dataBuffer[pIndex];
+
+    //[1  3]
+    //[0  2]
+    if (p.active>0.0f)
+    {
+        if (vIndex == 0)
+        {
+            m_Positions[id.x] = p.pos + float3(-size, -size, 0);
+        }
+        else if (vIndex == 1)
+        {
+            m_Positions[id.x] = p.pos + float3(-size, size, 0);
+        }
+        else if (vIndex == 2)
+        {
+            m_Positions[id.x] = p.pos + float3(size, -size, 0);
+        }
+        else
+        {
+            m_Positions[id.x] = p.pos + float3(size, size, 0);
+        }
+
+        // m_Colors[id.x] = p.color;
+
+    }
+    else
+    {
+        m_Positions[id.x] = 0;
+    }
+}
