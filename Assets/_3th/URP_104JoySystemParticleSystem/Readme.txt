@@ -1,0 +1,2 @@
+1.利用jobsystem产生粒子特效
+2.一个Mesh的顶点位置在不断的变化，这些通过jobsystem并行处理

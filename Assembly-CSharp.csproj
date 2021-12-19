@@ -55,7 +55,7 @@
      <Compile Include="Assets\_3th\URP_401Decal\UnityObject2World.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeMeshJob.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeTextureJob.cs" />
-     <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\ParticleSystemJoy.cs" />
+     <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\ParticleSystemJob.cs" />
      <Compile Include="Assets\_3th\URP_501UVAnimation-HackMatrixEffect\MatrixJumpBetweenValues.cs" />
      <Compile Include="Assets\_3th\General\SceneRenderPipelineConfig.cs" />
      <Compile Include="Assets\_3th\General\CameraController\SimpleCameraController.cs" />
@@ -67,10 +67,12 @@
      <Compile Include="Assets\_3th\URP_103ComputerShaderParticleSystem\ParticleSystem.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MeshGenerator.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeMeshIndicesJob.cs" />
+     <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\ParticlePosJob.cs" />
      <None Include="Assets\_3th\URP_102ComputeShaderGrass\GrassUnlitShader.shader" />
      <None Include="Assets\_3th\URP_502UVAnimation-MagnifierGlass\ReadMe.txt" />
      <None Include="Assets\_3th\URP_401Decal\ReadMe.txt" />
      <None Include="Assets\_3th\URP_101GrassGeometryShader\GrassGeometry\GeoGrass.shader" />
+     <None Include="Assets\_3th\URP_104JoySystemParticleSystem\Readme.txt" />
      <None Include="Assets\_3th\URP_301SimpleCloud\ReadMe.txt" />
      <None Include="Assets\_3th\URP_101GrassGeometryShader\GrassGeometry\Tessellation.hlsl" />
      <None Include="Assets\_3th\URP_102ComputeShaderGrass\WindCompute.compute" />
