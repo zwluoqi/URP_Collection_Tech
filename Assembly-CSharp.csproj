@@ -53,10 +53,20 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\_3th\URP_401Decal\UnityObject2World.cs" />
+     <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeMeshJob.cs" />
+     <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeTextureJob.cs" />
+     <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\ParticleSystemJoy.cs" />
      <Compile Include="Assets\_3th\URP_501UVAnimation-HackMatrixEffect\MatrixJumpBetweenValues.cs" />
      <Compile Include="Assets\_3th\General\SceneRenderPipelineConfig.cs" />
      <Compile Include="Assets\_3th\General\CameraController\SimpleCameraController.cs" />
+     <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeUVJob.cs" />
      <Compile Include="Assets\_3th\URP_102ComputeShaderGrass\GrassMeshGen.cs" />
+     <Compile Include="Assets\_3th\General\CustomVertexHelper.cs" />
+     <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MeshGeneratorMainThread.cs" />
+     <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\JoySystemParticleSystem.cs" />
+     <Compile Include="Assets\_3th\URP_103ComputerShaderParticleSystem\ParticleSystem.cs" />
+     <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MeshGenerator.cs" />
+     <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeMeshIndicesJob.cs" />
      <None Include="Assets\_3th\URP_102ComputeShaderGrass\GrassUnlitShader.shader" />
      <None Include="Assets\_3th\URP_502UVAnimation-MagnifierGlass\ReadMe.txt" />
      <None Include="Assets\_3th\URP_401Decal\ReadMe.txt" />
@@ -66,6 +76,7 @@
      <None Include="Assets\_3th\URP_102ComputeShaderGrass\WindCompute.compute" />
      <None Include="Assets\_3th\URP_301SimpleCloud\SimpleCloud-2.shader" />
      <None Include="Assets\_3th\General\NoiseShader\Common.hlsl" />
+     <None Include="Assets\_3th\URP_401Decal\Decal2.shader" />
      <None Include="Assets\_3th\URP_201ToonLitShader\Shader\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />
      <None Include="Assets\_3th\General\NoiseShader\ClassicNoise3D.hlsl" />
      <None Include="Assets\_3th\General\NoiseShader\SimplexNoise2D.hlsl" />
@@ -306,6 +317,9 @@
  </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst.Unsafe">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.burst@1.4.11/Unity.Burst.Unsafe.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -720,6 +734,12 @@
  </Reference>
  <Reference Include="Unity.Mathematics">
  <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst.Editor">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
