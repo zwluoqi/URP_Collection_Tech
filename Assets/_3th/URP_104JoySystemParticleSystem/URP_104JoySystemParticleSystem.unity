@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13020575, g: 0.17303546, b: 0.21959947, a: 1}
+  m_IndirectSpecularColor: {r: 0.13019402, g: 0.17309174, b: 0.21957219, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -260,7 +260,7 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.61449087, g: 0.5741812, b: 0.6509434, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -425,7 +425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c8891e3611c2b4894f697b14852484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleCount: 10
-  life: 256
+  particleScale: 1
+  particleSpeed: 2
+  particleLift: 10
+  particleRadio: 0.01
   timer: 0
   material: {fileID: 2100000, guid: cfd52f0d7f4e9194e81aa22cff8a3b7c, type: 2}
