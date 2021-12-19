@@ -8,6 +8,9 @@ Tested with : Win DX11, Mac Metal
 | `URP_ComputerShader_Tree` | ![](READMEImages/URP_ComputerShader_Tree.png) | Computer Shader Tree |
 | `URP_GemotryShader_Tree` | ![](READMEImages/URP_GemotryShader_Tree.png) | Gemotry Shader Tree(Shader Targer 4.5,and not support osx&ios) |
 | `URP_ToonLitShader` | ![](READMEImages/URP_ToonLitShader.png) | Super Simple Toon Lit Shader |
+| `URP_JobSystemParticle` | ![](https://github.com/zwluoqi/URP_Collection_Tech/blob/main/Assets/_3th/URP_104JoySystemParticleSystem/particle_job.gif) | URP_JobSystemParticle |
+
+
 
 -------------
 References / Useful Links:
