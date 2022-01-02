@@ -52,7 +52,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\_3th\General\Lighting.cs" />
      <Compile Include="Assets\_3th\URP_401Decal\UnityObject2World.cs" />
+     <Compile Include="Assets\_3th\General\Texture\TextureFunc.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeTextureJob.cs" />
      <Compile Include="Assets\_3th\URP_501UVAnimation-HackMatrixEffect\MatrixJumpBetweenValues.cs" />
      <Compile Include="Assets\_3th\General\SceneRenderPipelineConfig.cs" />
@@ -64,18 +66,23 @@
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MeshGenerator.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeMeshJob.cs" />
      <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\ParticleSystemJob.cs" />
+     <Compile Include="Assets\_3th\General\Texture\TextureTools.cs" />
      <Compile Include="Assets\_3th\General\CustomVertexHelper.cs" />
      <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\JoySystemParticleSystem.cs" />
      <Compile Include="Assets\_3th\URP_103ComputerShaderParticleSystem\ComputerShaderParticleSystem.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeMeshIndicesJob.cs" />
+     <Compile Include="Assets\_3th\General\SRPBatcherProfiler.cs" />
      <None Include="Assets\_3th\URP_102ComputeShaderGrass\GrassUnlitShader.shader" />
      <None Include="Assets\_3th\URP_502UVAnimation-MagnifierGlass\ReadMe.txt" />
+     <None Include="Assets\_3th\General\CustomShader\ShaderLibrary\CustomLighting.hlsl" />
      <None Include="Assets\_3th\URP_401Decal\ReadMe.txt" />
      <None Include="Assets\_3th\URP_101GrassGeometryShader\GrassGeometry\GeoGrass.shader" />
+     <None Include="Assets\_3th\General\CustomShader\CustomLitInput.hlsl" />
      <None Include="Assets\_3th\URP_104JoySystemParticleSystem\Readme.txt" />
      <None Include="Assets\_3th\URP_301SimpleCloud\ReadMe.txt" />
      <None Include="Assets\_3th\URP_101GrassGeometryShader\GrassGeometry\Tessellation.hlsl" />
      <None Include="Assets\_3th\URP_102ComputeShaderGrass\WindCompute.compute" />
+     <None Include="Assets\_3th\General\CustomShader\CustomLitForwardPass.hlsl" />
      <None Include="Assets\_3th\URP_301SimpleCloud\SimpleCloud-2.shader" />
      <None Include="Assets\_3th\General\NoiseShader\Common.hlsl" />
      <None Include="Assets\_3th\URP_401Decal\Decal2.shader" />
@@ -87,9 +94,12 @@
      <None Include="Assets\_3th\URP_101GrassGeometryShader\GrassGeometry\Grass.hlsl" />
      <None Include="Assets\_3th\URP_501UVAnimation-HackMatrixEffect\ReadMe.txt" />
      <None Include="Assets\_3th\URP_201ToonLitShader\Shader\NiloZOffset.hlsl" />
+     <None Include="Assets\_3th\URP_1001LightProbeGroup\URP_1001LightProbeGroup\readme.txt" />
      <None Include="Assets\_3th\General\NoiseShader\SimplexNoise3D.hlsl" />
+     <None Include="Assets\_3th\General\CustomShader\ShaderLibrary\CustomEntityLighting.hlsl" />
      <None Include="Assets\_3th\URP_302Cloud\Shaders\Shader Graph\Clouds\Clouds Generated.shader" />
      <None Include="Assets\_3th\URP_201ToonLitShader\Shader\SimpleURPToonLitOutlineExample.shader" />
+     <None Include="Assets\_3th\General\CustomShader\CustomLit.shader" />
      <None Include="Assets\_3th\URP_301SimpleCloud\SimpleCloud.shader" />
      <None Include="Assets\_3th\URP_302Cloud\readme.txt" />
      <None Include="Assets\_3th\URP_301SimpleCloud\SimpleCloud-3.shader" />
@@ -318,11 +328,11 @@
  <Reference Include="UnityEditor.UnityConnectModule">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Burst.Unsafe">
- <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.burst@1.4.11/Unity.Burst.Unsafe.dll</HintPath>
- </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst.Unsafe">
+ <HintPath>/Users/zhouwei/Unity/URP_Collection_Tech/Library/PackageCache/com.unity.burst@1.4.11/Unity.Burst.Unsafe.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity2020.3.22/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

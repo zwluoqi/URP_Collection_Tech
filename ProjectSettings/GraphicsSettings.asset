@@ -42,7 +42,7 @@ GraphicsSettings:
   - {fileID: 17000, guid: 0000000000000000f000000000000000, type: 0}
   m_PreloadedShaders: []
   m_SpritesDefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_CustomRenderPipeline: {fileID: 11400000, guid: c20ab8e23fb03df429bb21272bf4b927, type: 2}
+  m_CustomRenderPipeline: {fileID: 11400000, guid: a055c5897088f4a0e9300d434fcf3c9e, type: 2}
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 0, z: 1}
   m_DefaultRenderingPath: 1

@@ -11,6 +11,10 @@ obj
 
 *.pdf
 *.zip
+*.fbx
+URP_201ToonLitShader
+*.csproj
+*.cache
 
 
 # Prerequisites
