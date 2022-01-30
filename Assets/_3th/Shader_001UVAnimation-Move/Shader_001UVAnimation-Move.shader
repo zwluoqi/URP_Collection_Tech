@@ -1,4 +1,4 @@
-Shader "Unlit/Shader_001UVAnimation-Move"
+Shader "Shader/Shader_001UVAnimation-Move"
 {
     Properties
     {
@@ -10,7 +10,7 @@ Shader "Unlit/Shader_001UVAnimation-Move"
     }
     SubShader
     {
-        Tags { "RenderType"="TransParent" }
+        Tags { "RenderType"="TransParent" "Queue" = "TransParent"}
         LOD 100
 
         Pass

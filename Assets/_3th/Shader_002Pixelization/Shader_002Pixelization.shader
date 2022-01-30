@@ -9,7 +9,7 @@ Shader "Shader/Shader_002Pixelization"
     }
     SubShader
     {
-        Tags { "RenderType"="TransParent" }
+        Tags { "RenderType"="TransParent" "Queue" = "TransParent"}
         LOD 100
 
         Pass
