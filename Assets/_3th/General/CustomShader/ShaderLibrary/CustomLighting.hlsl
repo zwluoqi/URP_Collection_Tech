@@ -69,7 +69,7 @@ float DistanceAttenuation(float distanceSqr, half2 distanceAttenuation)
 #if SHADER_HINT_NICE_QUALITY
     // Use the smoothing factor also used in the Unity lightmapper.
     half factor = distanceSqr * distanceAttenuation.x;
-    half smoothFactor = saturate(1.0h - factor * factor);
+    half smoothFactor = saturate(1.0 - factor * factor);
     smoothFactor = smoothFactor * smoothFactor;
 #else
     // We need to smoothly fade attenuation to light range. We start fading linearly at 80% of light range
@@ -297,8 +297,8 @@ inline void InitializeBRDFDataDirect(half3 diffuse, half3 specular, half reflect
     outBRDFData.roughness           = max(PerceptualRoughnessToRoughness(outBRDFData.perceptualRoughness), HALF_MIN_SQRT);
     outBRDFData.roughness2          = max(outBRDFData.roughness * outBRDFData.roughness, HALF_MIN);
     outBRDFData.grazingTerm         = saturate(smoothness + reflectivity);
-    outBRDFData.normalizationTerm   = outBRDFData.roughness * 4.0h + 2.0h;
-    outBRDFData.roughness2MinusOne  = outBRDFData.roughness2 - 1.0h;
+    outBRDFData.normalizationTerm   = outBRDFData.roughness * 4.0 + 2.0;
+    outBRDFData.roughness2MinusOne  = outBRDFData.roughness2 - 1.0;
 
 #ifdef _ALPHAPREMULTIPLY_ON
     outBRDFData.diffuse *= alpha;
@@ -342,14 +342,14 @@ inline void InitializeBRDFDataClearCoat(half clearCoatMask, half clearCoatSmooth
     outBRDFData.perceptualRoughness = PerceptualSmoothnessToPerceptualRoughness(clearCoatSmoothness);
     outBRDFData.roughness           = max(PerceptualRoughnessToRoughness(outBRDFData.perceptualRoughness), HALF_MIN_SQRT);
     outBRDFData.roughness2          = max(outBRDFData.roughness * outBRDFData.roughness, HALF_MIN);
-    outBRDFData.normalizationTerm   = outBRDFData.roughness * 4.0h + 2.0h;
-    outBRDFData.roughness2MinusOne  = outBRDFData.roughness2 - 1.0h;
+    outBRDFData.normalizationTerm   = outBRDFData.roughness * 4.0 + 2.0;
+    outBRDFData.roughness2MinusOne  = outBRDFData.roughness2 - 1.0;
     outBRDFData.grazingTerm         = saturate(clearCoatSmoothness + kDielectricSpec.x);
 
 // Relatively small effect, cut it for lower quality
 #if !defined(SHADER_API_MOBILE)
     // Modify Roughness of base layer using coat IOR
-    half ieta                        = lerp(1.0h, CLEAR_COAT_IETA, clearCoatMask);
+    float ieta                        = lerp(1.0, CLEAR_COAT_IETA, clearCoatMask);
     half coatRoughnessScale          = Sq(ieta);
     half sigma                       = RoughnessToVariance(PerceptualRoughnessToRoughness(baseBRDFData.perceptualRoughness));
 
@@ -358,8 +358,8 @@ inline void InitializeBRDFDataClearCoat(half clearCoatMask, half clearCoatSmooth
     // Recompute base material for new roughness, previous computation should be eliminated by the compiler (as it's unused)
     baseBRDFData.roughness          = max(PerceptualRoughnessToRoughness(baseBRDFData.perceptualRoughness), HALF_MIN_SQRT);
     baseBRDFData.roughness2         = max(baseBRDFData.roughness * baseBRDFData.roughness, HALF_MIN);
-    baseBRDFData.normalizationTerm  = baseBRDFData.roughness * 4.0h + 2.0h;
-    baseBRDFData.roughness2MinusOne = baseBRDFData.roughness2 - 1.0h;
+    baseBRDFData.normalizationTerm  = baseBRDFData.roughness * 4.0 + 2.0;
+    baseBRDFData.roughness2MinusOne = baseBRDFData.roughness2 - 1.0;
 #endif
 
     // Darken/saturate base layer using coat to surface reflectance (vs. air to surface)
@@ -410,7 +410,7 @@ half DirectBRDFSpecular(BRDFData brdfData, half3 normalWS, half3 lightDirectionW
     float d = NoH * NoH * brdfData.roughness2MinusOne + 1.00001f;
 
     half LoH2 = LoH * LoH;
-    half specularTerm = brdfData.roughness2 / ((d * d) * max(0.1h, LoH2) * brdfData.normalizationTerm);
+    half specularTerm = brdfData.roughness2 / ((d * d) * max(0.1, LoH2) * brdfData.normalizationTerm);
 
     // On platforms where half actually means something, the denominator has a risk of overflow
     // clamp below was added specifically to "fix" that, but dx compiler (we convert bytecode to metal/gles)
@@ -559,7 +559,7 @@ half3 SampleLightmap(float2 lightmapUV, half3 normalWS)
     bool encodedLightmap = true;
 #endif
 
-    half4 decodeInstructions = half4(LIGHTMAP_HDR_MULTIPLIER, LIGHTMAP_HDR_EXPONENT, 0.0h, 0.0h);
+    half4 decodeInstructions = half4(LIGHTMAP_HDR_MULTIPLIER, LIGHTMAP_HDR_EXPONENT, 0.0, 0.0);
 
     // The shader library sample lightmap functions transform the lightmap uv coords to apply bias and scale.
     // However, universal pipeline already transformed those coords in vertex. We pass half4(1, 1, 0, 0) and
@@ -698,7 +698,7 @@ half3 LightingSpecular(half3 lightColor, half3 lightDir, half3 normal, half3 vie
     return lightColor * specularReflection;
 }
 
-half3 LightingPhysicallyBased(BRDFData brdfData, BRDFData brdfDataClearCoat,
+half3 LightingPhysicallyBasedImp(BRDFData brdfData, BRDFData brdfDataClearCoat,
     half3 lightColor, half3 lightDirectionWS, half lightAttenuation,
     half3 normalWS, half3 viewDirectionWS,
     half clearCoatMask, bool specularHighlightsOff)
@@ -733,13 +733,13 @@ half3 LightingPhysicallyBased(BRDFData brdfData, BRDFData brdfDataClearCoat,
     return brdf * radiance;
 }
 
-half3 LightingPhysicallyBased(BRDFData brdfData, BRDFData brdfDataClearCoat, Light light, half3 normalWS, half3 viewDirectionWS, half clearCoatMask, bool specularHighlightsOff)
+half3 LightingPhysicallyBasedCustom(BRDFData brdfData, BRDFData brdfDataClearCoat, Light light, half3 normalWS, half3 viewDirectionWS, half clearCoatMask, bool specularHighlightsOff)
 {
-    return LightingPhysicallyBased(brdfData, brdfDataClearCoat, light.color, light.direction, light.distanceAttenuation * light.shadowAttenuation, normalWS, viewDirectionWS, clearCoatMask, specularHighlightsOff);
+    return LightingPhysicallyBasedImp(brdfData, brdfDataClearCoat, light.color, light.direction, light.distanceAttenuation * light.shadowAttenuation, normalWS, viewDirectionWS, clearCoatMask, specularHighlightsOff);
 }
 
 // Backwards compatibility
-half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, half3 viewDirectionWS)
+half3 LightingPhysicallyBasedBackWards(BRDFData brdfData, Light light, half3 normalWS, half3 viewDirectionWS)
 {
     #ifdef _SPECULARHIGHLIGHTS_OFF
     bool specularHighlightsOff = true;
@@ -747,7 +747,7 @@ half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, ha
     bool specularHighlightsOff = false;
 #endif
     const BRDFData noClearCoat = (BRDFData)0;
-    return LightingPhysicallyBased(brdfData, noClearCoat, light, normalWS, viewDirectionWS, 0.0, specularHighlightsOff);
+    return LightingPhysicallyBasedCustom(brdfData, noClearCoat, light, normalWS, viewDirectionWS, 0.0, specularHighlightsOff);
 }
 
 half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDirectionWS, half lightAttenuation, half3 normalWS, half3 viewDirectionWS)
@@ -757,13 +757,13 @@ half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDi
     light.direction = lightDirectionWS;
     light.distanceAttenuation = lightAttenuation;
     light.shadowAttenuation   = 1;
-    return LightingPhysicallyBased(brdfData, light, normalWS, viewDirectionWS);
+    return LightingPhysicallyBasedBackWards(brdfData, light, normalWS, viewDirectionWS);
 }
 
 half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, half3 viewDirectionWS, bool specularHighlightsOff)
 {
     const BRDFData noClearCoat = (BRDFData)0;
-    return LightingPhysicallyBased(brdfData, noClearCoat, light, normalWS, viewDirectionWS, 0.0, specularHighlightsOff);
+    return LightingPhysicallyBasedCustom(brdfData, noClearCoat, light, normalWS, viewDirectionWS, 0.0, specularHighlightsOff);
 }
 
 half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDirectionWS, half lightAttenuation, half3 normalWS, half3 viewDirectionWS, bool specularHighlightsOff)
@@ -837,7 +837,7 @@ half4 UniversalFragmentPBR(InputData inputData, SurfaceData surfaceData)
     half3 color = GlobalIllumination(brdfData, brdfDataClearCoat, surfaceData.clearCoatMask,
                                      inputData.bakedGI, surfaceData.occlusion,
                                      inputData.normalWS, inputData.viewDirectionWS);
-    color += LightingPhysicallyBased(brdfData, brdfDataClearCoat,
+    color += LightingPhysicallyBasedCustom(brdfData, brdfDataClearCoat,
                                      mainLight,
                                      inputData.normalWS, inputData.viewDirectionWS,
                                      surfaceData.clearCoatMask, specularHighlightsOff);
@@ -850,7 +850,7 @@ half4 UniversalFragmentPBR(InputData inputData, SurfaceData surfaceData)
         #if defined(_SCREEN_SPACE_OCCLUSION)
             light.color *= aoFactor.directAmbientOcclusion;
         #endif
-        color += LightingPhysicallyBased(brdfData, brdfDataClearCoat,
+        color += LightingPhysicallyBasedCustom(brdfData, brdfDataClearCoat,
                                          light,
                                          inputData.normalWS, inputData.viewDirectionWS,
                                          surfaceData.clearCoatMask, specularHighlightsOff);

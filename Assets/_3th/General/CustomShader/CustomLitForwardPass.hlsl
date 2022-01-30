@@ -298,7 +298,7 @@ half4 UniversalFragmentPBRCustom(InputData inputData, SurfaceData surfaceData)
                                      inputData.normalWS, inputData.viewDirectionWS);
     // color =      half3(inputData.bakedGI);
     // color += brdfData.diffuse;
-    color += LightingPhysicallyBased(brdfData, brdfDataClearCoat,
+    color += LightingPhysicallyBasedCustom(brdfData, brdfDataClearCoat,
                                      mainLight,
                                      inputData.normalWS, inputData.viewDirectionWS,
                                      surfaceData.clearCoatMask, specularHighlightsOff);
@@ -311,7 +311,7 @@ half4 UniversalFragmentPBRCustom(InputData inputData, SurfaceData surfaceData)
         #if defined(_SCREEN_SPACE_OCCLUSION)
             light.color *= aoFactor.directAmbientOcclusion;
         #endif
-        color += LightingPhysicallyBased(brdfData, brdfDataClearCoat,
+        color += LightingPhysicallyBasedCustom(brdfData, brdfDataClearCoat,
                                          light,
                                          inputData.normalWS, inputData.viewDirectionWS,
                                          surfaceData.clearCoatMask, specularHighlightsOff);
