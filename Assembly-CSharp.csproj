@@ -58,6 +58,7 @@
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeTextureJob.cs" />
      <Compile Include="Assets\_3th\URP_501UVAnimation-HackMatrixEffect\MatrixJumpBetweenValues.cs" />
      <Compile Include="Assets\_3th\General\SceneRenderPipelineConfig.cs" />
+     <Compile Include="Assets\_3th\General\SRPBatcherProfiler.cs" />
      <Compile Include="Assets\_3th\General\CameraController\SimpleCameraController.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeUVJob.cs" />
      <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\ParticlePosJob.cs" />
@@ -71,13 +72,13 @@
      <Compile Include="Assets\_3th\URP_104JoySystemParticleSystem\JoySystemParticleSystem.cs" />
      <Compile Include="Assets\_3th\URP_103ComputerShaderParticleSystem\ComputerShaderParticleSystem.cs" />
      <Compile Include="Assets\_3th\URP_601JoySystemMeshCombine\MergeMeshIndicesJob.cs" />
-     <Compile Include="Assets\_3th\General\SRPBatcherProfiler.cs" />
      <None Include="Assets\_3th\URP_102ComputeShaderGrass\GrassUnlitShader.shader" />
      <None Include="Assets\_3th\URP_502UVAnimation-MagnifierGlass\ReadMe.txt" />
      <None Include="Assets\_3th\General\CustomShader\ShaderLibrary\CustomLighting.hlsl" />
      <None Include="Assets\_3th\URP_401Decal\ReadMe.txt" />
      <None Include="Assets\_3th\URP_101GrassGeometryShader\GrassGeometry\GeoGrass.shader" />
      <None Include="Assets\_3th\General\CustomShader\CustomLitInput.hlsl" />
+     <None Include="Assets\_3th\General\CustomCommon.hlsl" />
      <None Include="Assets\_3th\URP_104JoySystemParticleSystem\Readme.txt" />
      <None Include="Assets\_3th\URP_301SimpleCloud\ReadMe.txt" />
      <None Include="Assets\_3th\URP_101GrassGeometryShader\GrassGeometry\Tessellation.hlsl" />
