@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[ExecuteAlways]
+// [ExecuteAlways]
 [RequireComponent(typeof(MeshFilter))]
 public class GrassMeshGen : MonoBehaviour
 {
@@ -82,7 +82,7 @@ public class GrassMeshGen : MonoBehaviour
         int kernel = shader.FindKernel("Swing");
         shader.SetBuffer(kernel, "dataBuffer", buffer);
         shader.Dispatch(kernel, data.Length, 1, 1);
-
+        
         buffer.GetData(output);
         for (int i = 0; i < output.Length; ++i)
         {
