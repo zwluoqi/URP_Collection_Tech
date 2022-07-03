@@ -8,6 +8,7 @@ Library
 Logs
 Temp
 obj
+obj/Debug
 
 *.pdf
 *.zip
@@ -15,6 +16,7 @@ obj
 URP_201ToonLitShader
 *.csproj
 *.cache
+*.csproj
 
 
 # Prerequisites
@@ -51,3 +53,4 @@ URP_201ToonLitShader
 *.app
 obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
 *.cache
+*.csproj

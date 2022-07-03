@@ -21,7 +21,9 @@ public class UnityObject2World : MonoBehaviour
     {
         obj2World = this.transform.localToWorldMatrix;
         world2Obj = this.transform.worldToLocalMatrix;
-        
+
+        // SphericalHarmonicsL3 s;
+            
         SphericalHarmonicsL2 sh;
         // var probes = LightmapSettings.lightProbes.bakedProbes;
         // lightMapSetttingBackProbeCount = probes.Length;

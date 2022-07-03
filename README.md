@@ -5,11 +5,14 @@ Unity version : 2020.3 on master branch \
 Tested with : Win DX11, Mac Metal
 | Scene | Image | Description |
 | --- | - | --- |
-| `URP_ComputerShader_Tree` | ![](READMEImages/URP_ComputerShader_Tree.png) | Computer Shader Tree |
-| `URP_GemotryShader_Tree` | ![](READMEImages/URP_GemotryShader_Tree.png) | Gemotry Shader Tree(Shader Targer 4.5,and not support osx&ios) |
-| `URP_ToonLitShader` | ![](READMEImages/URP_ToonLitShader.png) | Super Simple Toon Lit Shader |
-| `URP_JobSystemParticle` | ![](https://github.com/zwluoqi/URP_Collection_Tech/blob/main/Assets/_3th/URP_104JoySystemParticleSystem/particle_job.gif) | URP_JobSystemParticle |
-
+| `URP_ComputerShader_Tree` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/URP_ComputerShader_Tree.png) | Computer Shader Tree |
+| `URP_ToonLitShader` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/URP_ToonLitShader.png) | Super Simple Toon Lit Shader |
+| `URP_JobSystemParticle` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/particle_job.gif) | URP_JobSystemParticle |
+| `URP_vertextCloud` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/URP_Cloud.png) | Vertex Cloud |
+| `URP_simpleCloud` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/301simple_cloud.png) | Simple Cloud |
+| `URP_decal` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/401decal.png) | Decal |
+| `URP_uvanimation` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/501uv_animation.png) | uv_animation |
+| `URP_magnifier_glass` | ![](https://workbooko1.oss-cn-hangzhou.aliyuncs.com/uPic/502magnifier_glass.png) | magnifier_glass |
 
 
 -------------
